@@ -1,0 +1,36 @@
+.home_section {
+  background-image: url("../images/coronavirus.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: #46b89a23;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  // color: rgba(32, 32, 32, 0.801) !important;
+  .home_heading {
+    // border-bottom: 1px solid #303a52;
+  }
+  .search_section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .search_section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .search_input {
+      margin-right: 0 !important;
+      margin-bottom: 1rem;
+    }
+  }
+}
