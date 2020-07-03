@@ -1,19 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { v4 as uuid } from "uuid";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       district: "",
+      searchedCities: [],
     };
   }
   handleSearch = (e) => {
     this.setState({ district: e.target.value });
   };
-  handleChoice = (e) => {
-    console.dir(e.target.value);
+
+  filteredCities = () => {
+    let regex = new RegExp(this.state.district, "ig");
+
+    var searchedCities =
+      this.props.cities && this.props.cities.filter((city) => regex.test(city));
+
+    return searchedCities;
   };
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.district === nextState.district) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   render() {
     return (
       <div className=" home_section pt-5">
@@ -31,7 +46,10 @@ class Home extends Component {
             />
             {this.state.district && (
               <datalist id="districtlist">
-                <option value="Naruto" />
+                {this.props.cities &&
+                  this.filteredCities().map((city) => (
+                    <option value={city} key={uuid()} />
+                  ))}
               </datalist>
             )}
           </div>
@@ -44,6 +62,12 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     zoneInfo: state,
+    cities: state.zoneDetails
+      ? state.zoneDetails.reduce((acc, city) => {
+          acc = acc.concat(city.district);
+          return acc;
+        }, [])
+      : "",
   };
 }
 export default connect(mapStateToProps)(Home);
