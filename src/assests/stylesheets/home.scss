@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   // color: rgba(32, 32, 32, 0.801) !important;
   .home_heading {
     // border-bottom: 1px solid #303a52;
@@ -19,9 +20,12 @@
     justify-content: center;
     align-items: center;
   }
+  .select_input {
+    width: 300px;
+  }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 799px) {
   .search_section {
     display: flex;
     flex-wrap: wrap;
@@ -32,5 +36,10 @@
       margin-right: 0 !important;
       margin-bottom: 1rem;
     }
+  }
+  .select_input {
+    width: 90%;
+    margin-right: 0 !important;
+    margin-bottom: 1rem;
   }
 }

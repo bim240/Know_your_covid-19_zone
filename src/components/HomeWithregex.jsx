@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Select from "react-select";
 import { connect } from "react-redux";
+import { v4 as uuid } from "uuid";
 import { withSnackbar } from "notistack";
 import Card from "./Card";
 
-class Home extends Component {
+class HomeWithRegex extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,17 +13,26 @@ class Home extends Component {
     };
   }
   enqueueSnackbar = this.props.enqueueSnackbar;
-  handleSearchDistrictName = (selectedOption) => {
-    this.setState({ district: selectedOption });
+  handleSearch = (e) => {
+    this.setState({ district: e.target.value });
+  };
+
+  filteredCities = () => {
+    let regex = new RegExp(this.state.district, "ig");
+
+    var searchedCities =
+      this.props.cities && this.props.cities.filter((city) => regex.test(city));
+
+    return searchedCities;
   };
   handleResetSearch = () => {
     this.setState({ cardDispaly: "", district: "" });
   };
   handleSearchDistrict = () => {
     // console.log(JSON.stringify(this.state.district));
-    let flag = this.props.cities.find(
-      (city) => JSON.stringify(city) === JSON.stringify(this.state.district)
-    );
+    let flag = this.props.cities.find((city) => city === this.state.district);
+    console.log(flag);
+
     if (!flag) {
       this.enqueueSnackbar('"Please enter a valid district', {
         variant: "error",
@@ -36,28 +45,37 @@ class Home extends Component {
       return;
     }
     let newCardDispayDistrict = this.props.zoneInfo.zoneDetails.filter(
-      (city) => city.district === this.state.district.value
+      (city) => city.district === this.state.district
     );
     this.setState({ cardDispaly: newCardDispayDistrict });
   };
-
   render() {
-    console.log(this.props);
     return (
       <div className=" home_section pt-5">
         <h3 className="font-weight-bolder pb-3 home_heading">Know your Zone</h3>
         <div className="search_section">
-          <div className="select_input mr-3">
-            <Select
+          <div className="search_input mr-3">
+            <input
+              className="form-control"
+              list="districtlist"
+              id="district"
               name="district"
+              placeholder="search here..."
               value={this.state.district}
-              onChange={this.handleSearchDistrictName}
-              options={this.props.cities}
+              onChange={this.handleSearch}
             />
+            {this.state.district && (
+              <datalist id="districtlist">
+                {this.props.cities &&
+                  this.filteredCities().map((city) => (
+                    <option value={city} key={uuid()} />
+                  ))}
+              </datalist>
+            )}
           </div>
           <button
             onClick={this.handleSearchDistrict}
-            className="btn btn-secondary ">
+            className="btn btn-success ">
             {" "}
             Search
           </button>
@@ -79,13 +97,12 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     zoneInfo: state,
-
     cities: state.zoneDetails
       ? state.zoneDetails.reduce((acc, city) => {
-          acc = acc.concat({ value: city.district, label: city.district });
+          acc = acc.concat(city.district);
           return acc;
         }, [])
       : "",
   };
 }
-export default withSnackbar(connect(mapStateToProps)(Home));
+export default withSnackbar(connect(mapStateToProps)(HomeWithRegex));

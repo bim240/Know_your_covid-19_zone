@@ -1,0 +1,35 @@
+.Green {
+  border: 1px solid rgb(7, 214, 7);
+  // background-color: rgba(3, 124, 3, 0.048);
+}
+.Red {
+  border: 1px solid rgb(155, 2, 2);
+  // background-color: rgba(201, 5, 5, 0.178);
+}
+.Orange {
+  border: 1px solid orange;
+  // background-color: rgba(255, 166, 0, 0.096);
+}
+
+.Green_fill {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(10, 250, 10, 0.966);
+}
+.Red_fill {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(228, 0, 0);
+}
+
+.Orange_fill {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  background-color: orange;
+}

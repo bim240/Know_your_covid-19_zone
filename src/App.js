@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "./components/Home";
-
+import HomeWithRegex from "./components/HomeWithregex";
 import { getZoneInfo } from "./redux/actions/zoneInfoActon";
 import "./assests/stylesheets/main.scss";
 
@@ -20,7 +20,9 @@ class App extends Component {
     return (
       <>
         <Switch>
-          <Route exact to="/" component={Home} />
+          <Route exact path="/" component={Home} />
+          <Route path="/regex" component={HomeWithRegex} />
+          <Route path="*" render={() => <h1>404 Page</h1>} />
         </Switch>
       </>
     );
