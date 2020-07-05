@@ -42,7 +42,6 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className=" home_section pt-5">
         <h3 className="font-weight-bolder pb-3 home_heading">Know your Zone</h3>
