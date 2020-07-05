@@ -20,7 +20,6 @@ class Home extends Component {
     this.setState({ cardDispaly: "", district: "" });
   };
   handleSearchDistrict = () => {
-    // console.log(JSON.stringify(this.state.district));
     let flag = this.props.cities.find(
       (city) => JSON.stringify(city) === JSON.stringify(this.state.district)
     );

@@ -29,9 +29,7 @@ class HomeWithRegex extends Component {
     this.setState({ cardDispaly: "", district: "" });
   };
   handleSearchDistrict = () => {
-    // console.log(JSON.stringify(this.state.district));
     let flag = this.props.cities.find((city) => city === this.state.district);
-    console.log(flag);
 
     if (!flag) {
       this.enqueueSnackbar('"Please enter a valid district', {
