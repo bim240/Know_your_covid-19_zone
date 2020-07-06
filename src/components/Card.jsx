@@ -6,7 +6,7 @@ const Card = ({ district, state, zone, handleResetSearch }) => {
       <div className={`card mt-4 ${zone}`} style={{ minWidth: "18rem" }}>
         <div className="card-body">
           <h5 className="card-title font-weight-bolder">
-            Zone Inforamtion of {district}
+            Zone Information of {district}
           </h5>
           <h6 className="card-subtitle mb-2 my-2 font-weight-bolder">
             State:{state}
